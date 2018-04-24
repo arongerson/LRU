@@ -10,12 +10,20 @@ public class Test {
 		if (validCommandLineArgs) {
 			PageGenerator pageGenerator = new PageGenerator(referenceStringSize);
 			int[] referenceString = pageGenerator.getReferenceString();
+			printReferenceString(referenceString);
 			ReplacementAlgorithm replacementAlgorithm = new LRU(referenceString, numberOfPageFrames);
 			int[] output = replacementAlgorithm.insert();
 			System.out.println("Number of page replacements: " + output[0] + ", Number of page faults: " + output[1]); 
 		} else {
 			System.out.println("Invalid command line arguments"); 
 		}
+	}
+	
+	private static void printReferenceString(int[] referenceString) {
+		for (int i = 0; i < referenceString.length; i++) {
+			System.out.print(referenceString[i] + ",");
+		}
+		System.out.println();
 	}
 
 	private static boolean findCommandLineArgs(String[] args) {
